@@ -4,14 +4,17 @@
 
 exports.SaveTransaction = function(TransactionModel, Transaction, callback) {
 
+    if(typeof Transaction.amount == 'undefined' || typeof Transaction.addition == 'undefined') //Server Side Validation
+        return callback(false);
+
     TransactionModel.create(Transaction, function(err, effected, raw){
         if (err) {
             console.log("Error: " + err);
-            callback(false);
+            return callback(false);
 
         } else {
             console.log("Transaction Saved: " + effected + " raw: " + raw);
-            callback(true);
+            return callback(true);
         }
     });
 };

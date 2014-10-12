@@ -24,7 +24,7 @@ router.get('/transactions', function(req, res) {
 });
 
 router.post('/transactions', function(req, res) {
-    save.SaveTransaction.(Database.TransactionModel, req.body, function (success) {
+    save.SaveTransaction(database.TransactionModel, req.body, function (success) {
         if (success)
             res.send(200);
         else
