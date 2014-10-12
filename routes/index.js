@@ -22,6 +22,19 @@ router.get('/transactions', function(req, res) {
     });
 });
 
+router.post('/transactions', function(req, res) {
+    query.QueryTransactions(database.TransactionModel, function(results){
+
+        if(!results){
+            res.send(500);
+        } else {
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify(results, null, 3));
+        }
+
+    });
+});
+
 
 
 module.exports = router;
