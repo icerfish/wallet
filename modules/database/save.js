@@ -4,7 +4,6 @@
 
 exports.SaveTransaction = function(TransactionModel, Transaction, callback) {
 
-
     TransactionModel.create(Transaction, function(err, effected, raw){
         if (err) {
             console.log("Error: " + err);
