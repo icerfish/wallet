@@ -7,7 +7,7 @@ My first ever Angular.js app. A simple wallet application built using Node.js, A
 
 To run:
 
-    npm install markdown
+    npm install
     npm start
     
 Then navigate to:
