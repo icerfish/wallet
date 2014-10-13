@@ -4,5 +4,21 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/font-awesome.min.css')
+    link(rel='stylesheet', href='/stylesheets/responsive-nav.css')
+    script(src='javascripts/responsive-nav.js')
+
+    nav.nav-collapse
+      ul
+          li
+              a(href='#') Home
+          li
+              a(href='#') Reset
+          li
+              a(href='#') View Source
+
+    script.
+        var nav = responsiveNav(".nav-collapse");
+
   body
     block content
+
