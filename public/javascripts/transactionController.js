@@ -19,6 +19,7 @@ angular.module('myApp', []).controller('transactionController', ['$scope','$http
         {name:'Add', addition: true},
         {name:'Remove', addition: false}
     ];
+
     $scope.selectedOption = $scope.options[0];
 
     $scope.getTotal = function() {
@@ -26,9 +27,24 @@ angular.module('myApp', []).controller('transactionController', ['$scope','$http
         if(typeof $scope.transactions != 'undefined')
             for(var i = 0; i < $scope.transactions.length; i++){
                 var transaction = $scope.transactions[i];
-                total += transaction.amount;
+                if(transaction.addition){
+                    total += transaction.amount;
+                } else {
+                    total -= transaction.amount;
+                }
             }
         return total;
+    };
+
+    $scope.getMinValue = function() {
+        return 0.01;
+    };
+
+    $scope.getMaxValue = function() {
+        if(!$scope.selectedOption.addition)
+            return $scope.getTotal();
+        else
+            return null;
     };
 
     $scope.postTransaction = function() {
@@ -42,8 +58,8 @@ angular.module('myApp', []).controller('transactionController', ['$scope','$http
 
         $http.post('/transactions', dataObject).
             success(function(data, status, headers, config) {
-                // this callback will be called asynchronously
-                // when the response is available
+                console.log("Data: " + JSON.stringify(data));
+                $scope.transactions.push(data);
             }).
             error(function(data, status, headers, config) {
                 // called asynchronously if an error occurs

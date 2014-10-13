@@ -10,11 +10,16 @@ exports.SaveTransaction = function(TransactionModel, Transaction, callback) {
     TransactionModel.create(Transaction, function(err, effected, raw){
         if (err) {
             console.log("Error: " + err);
-            return callback(false);
+            return callback(false, effected);
 
         } else {
             console.log("Transaction Saved: " + effected + " raw: " + raw);
-            return callback(true);
+            var results = {  //Create new object to not pass Database Data
+                amount: effected.amount,
+                addition: effected.addition,
+                date: effected.date
+            };
+            return callback(true, results);
         }
     });
 };

@@ -24,11 +24,14 @@ router.get('/transactions', function(req, res) {
 });
 
 router.post('/transactions', function(req, res) {
-    save.SaveTransaction(database.TransactionModel, req.body, function (success) {
-        if (success)
-            res.send(200);
-        else
+    save.SaveTransaction(database.TransactionModel, req.body, function (success, results) {
+        if (!success)
             res.send(500);
+        else {
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify(results, null, 3));
+
+        }
 
     });
 });

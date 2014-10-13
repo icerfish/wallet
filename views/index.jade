@@ -7,7 +7,7 @@ block content
     form(ng-app='myApp', ng-controller='transactionController' name='myForm', novalidate='novalidate')
         p
             | Add/Remove:
-            input(type='number', name='amount', ng-model='amount', required='required')
+            input(type='number', name='amount', ng-model='amount', required='required', min="{{getMinValue()}}", max="{{getMaxValue()}}")
             span(style='color: red;', ng-show='myForm.amount.$dirty && myForm.amount.$invalid')
                 span.error(ng-show='myForm.amount.$error.number')
                 | Not valid number!
@@ -15,11 +15,15 @@ block content
             button(type='buton', ng-click='postTransaction()', ng-disabled="myForm.input.$dirty && myForm.input.$invalid") Submit
 
 
-            p Total = {{ getTotal() | currency }}
 
         ul
-            li(ng-repeat='t in transactions')
-                | {{ t.amount + ', ' + t.date }}
+            li(ng-repeat='t in transactions', ng-class="{'additionClass': t.addition, 'subtractionClass': !t.addition}")
+                | {{'Transaction: ' + (t.amount | currency) + ' Date: ' + t.date  }}
+
+
+        p Total =
+            i(class="fa fa-usd") {{ getTotal() | currency:'' }}
+
 
 
     script(src='javascripts/angular.min.js')

@@ -6,3 +6,13 @@ body {
 a {
   color: #00B7FF;
 }
+
+.additionClass {
+    background-color: #00ff00;
+    color:black;
+}
+
+.subtractionClass {
+    background-color: #ff0000;
+    color:white;
+}
