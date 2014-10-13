@@ -3,15 +3,15 @@ extends layout
 block content
     h1= title
 
-    form(ng-app='myApp', ng-controller='transactionController' name='myForm', novalidate='novalidate')
+    form(ng-app='myApp', ng-controller='transactionController' name='myForm' novalidate='novalidate')
         p
             | Add/Remove:
-            input(type='number', name='amount', ng-model='amount', required='required', min="{{getMinValue()}}", max="{{getMaxValue()}}")
+            input(type='number', name='amount', ng-model='amount', required='required', ng-min="getMinValue()", ng-max="getMaxValue()")
             span(style='color: red;', ng-show='myForm.amount.$dirty && myForm.amount.$invalid')
                 span.error(ng-show='myForm.amount.$error.number')
                 | Not valid number!
             select(name='addition', data-ng-options="o.name for o in options" data-ng-model="selectedOption")
-            button(type='buton', ng-click='postTransaction()', ng-disabled="myForm.input.$dirty && myForm.input.$invalid") Submit
+            button(type='buton', ng-click='postTransaction()', ng-disabled="myForm.amount.$dirty && myForm.amount.$invalid") Submit
 
         ul
             li(ng-repeat='t in transactions', ng-class="{'additionClass': t.addition, 'subtractionClass': !t.addition}")
