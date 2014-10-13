@@ -10,7 +10,7 @@ router.get('/', function(req, res) {
 });
 
 
-router.get('/transactions', function(req, res) {
+router.get('/transactions/all', function(req, res) {
     query.QueryTransactions(database.TransactionModel, function(results){
 
         if(!results){
@@ -23,7 +23,7 @@ router.get('/transactions', function(req, res) {
     });
 });
 
-router.post('/transactions', function(req, res) {
+router.post('/transactions/add', function(req, res) {
     save.SaveTransaction(database.TransactionModel, req.body, function (success, results) {
         if (!success)
             res.send(500);
@@ -33,6 +33,12 @@ router.post('/transactions', function(req, res) {
 
         }
 
+    });
+});
+
+router.get('/transactions/reset', function(req, res){
+    database.TransactionModel.remove({}, function(err) {
+        res.redirect('/');
     });
 });
 

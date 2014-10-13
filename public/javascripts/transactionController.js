@@ -4,7 +4,7 @@
 
 angular.module('myApp', []).controller('transactionController', ['$scope','$http', function($scope,$http) {
     var site = "http://localhost:3000";
-    var page = "/transactions";
+    var page = "/transactions/all";
     $http.get(site + page)
         .success(function(response){
             console.log("Response: " + JSON.stringify(response));
@@ -56,10 +56,22 @@ angular.module('myApp', []).controller('transactionController', ['$scope','$http
 
         console.log("Data Obj: " + JSON.stringify(dataObject));
 
-        $http.post('/transactions', dataObject).
+        $http.post('/transactions/add', dataObject).
             success(function(data, status, headers, config) {
                 console.log("Data: " + JSON.stringify(data));
                 $scope.transactions.push(data);
+            }).
+            error(function(data, status, headers, config) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+            });
+    };
+
+    $scope.resetTransactions = function(){
+        console.log('resetting transactions mofo');
+        $http.post('/transactions/reset').
+            success(function(data, status, headers, config) {
+
             }).
             error(function(data, status, headers, config) {
                 // called asynchronously if an error occurs

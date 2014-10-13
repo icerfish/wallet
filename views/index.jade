@@ -2,7 +2,6 @@ extends layout
 
 block content
     h1= title
-    p Welcome to #{title}
 
     form(ng-app='myApp', ng-controller='transactionController' name='myForm', novalidate='novalidate')
         p
@@ -13,8 +12,6 @@ block content
                 | Not valid number!
             select(name='addition', data-ng-options="o.name for o in options" data-ng-model="selectedOption")
             button(type='buton', ng-click='postTransaction()', ng-disabled="myForm.input.$dirty && myForm.input.$invalid") Submit
-
-
 
         ul
             li(ng-repeat='t in transactions', ng-class="{'additionClass': t.addition, 'subtractionClass': !t.addition}")
